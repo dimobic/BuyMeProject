@@ -7,17 +7,102 @@
 
 import UIKit
 
-class ScalesCell: UITableViewCell {
+class ScalesCell: UITableViewCell, UITextFieldDelegate {
 
+    var index : Int = 0
+    func text (_ field : UITextField)-> UITextField{
+        field.translatesAutoresizingMaskIntoConstraints = false
+        field.font = UIFont.systemFont(ofSize: 17)
+        field.returnKeyType = .done
+        field.autocapitalizationType = .sentences
+        field.backgroundColor = .systemGray6
+        field.textAlignment = .center
+        field.borderStyle = .roundedRect
+        field.clipsToBounds = true
+        field.autocorrectionType = .no
+        field.enablesReturnKeyAutomatically = true
+        field.keyboardType = .numberPad
+        return field
+    }
+    lazy var TextPrice : UITextField = {
+         let field = UITextField()
+        field.addTarget(self, action: #selector(TextPriceFieldDidGange), for: .editingChanged)
+         return text(field)
+     }()
+    lazy var TextWeight : UITextField = {
+        let field = UITextField()
+        field.addTarget(self, action: #selector(TextWeightFieldDidGange), for: .editingChanged)
+        return text(field)
+     }()
+    lazy var TextAvaragePrice : UILabel = {
+        let field = UILabel()
+        field.translatesAutoresizingMaskIntoConstraints = false
+        field.font = UIFont.systemFont(ofSize: 17)
+        field.backgroundColor = .white
+        field.textAlignment = .center
+        field.clipsToBounds = true
+        return field
+     }()
+    
+    @objc func TextPriceFieldDidGange(){
+        print("TextPriceFieldDidGange = \(TextPrice.text)")
+        if TextPrice.text != nil {
+            if let price = Double(TextPrice.text!){
+                repairItem(at: index - 1 , price: price)
+            }
+        }
+    }
+    @objc func TextWeightFieldDidGange(){
+        print("TextPriceFieldDidGange = \(TextWeight.text)")
+        if TextWeight.text != nil {
+            if let weight = Double(TextWeight.text!){
+                repairItem(at: index - 1 , weight: weight )
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        initConstraints()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+    @objc func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        TextPrice.resignFirstResponder()
+        TextWeight.resignFirstResponder()
+        TextAvaragePrice.becomeFirstResponder()
+        print(index)
+        return true
+    }
+    
+    func initConstraints(){
+        self.contentView.addSubview(TextPrice)
+        self.contentView.addSubview(TextWeight)
+        self.contentView.addSubview(TextAvaragePrice)
+        
+        TextPrice.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+        TextPrice.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 10).isActive = true
+        TextPrice.heightAnchor.constraint(equalTo: self.contentView.heightAnchor, multiplier: 9/10).isActive = true
+        TextPrice.widthAnchor.constraint(equalTo: self.TextAvaragePrice.widthAnchor).isActive = true
 
+        TextWeight.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+        TextWeight.leftAnchor.constraint(equalTo: self.TextPrice.rightAnchor, constant: 10).isActive = true
+        TextWeight.rightAnchor.constraint(equalTo: self.TextAvaragePrice.leftAnchor, constant: -10).isActive = true
+        TextWeight.heightAnchor.constraint(equalTo: self.contentView.heightAnchor, multiplier: 9/10).isActive = true
+        TextWeight.widthAnchor.constraint(equalTo: self.TextAvaragePrice.widthAnchor).isActive = true
+
+        TextAvaragePrice.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+        TextAvaragePrice.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -10).isActive = true
+        TextAvaragePrice.heightAnchor.constraint(equalTo: self.contentView.heightAnchor, multiplier: 9/10).isActive = true
+        TextAvaragePrice.widthAnchor.constraint(equalTo: self.TextPrice.widthAnchor).isActive = true
+        
+        TextWeight.delegate = self
+    }
 }

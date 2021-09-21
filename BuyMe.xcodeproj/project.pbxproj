@@ -25,6 +25,8 @@
 		0B2AD73626CD7B5600A88B95 /* StorageAddCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2AD73526CD7B5600A88B95 /* StorageAddCell.swift */; };
 		0B742A6E26EE9D0400B59484 /* ModelScales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B742A6D26EE9D0400B59484 /* ModelScales.swift */; };
 		0B742A7126EE9D3800B59484 /* CoreDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B742A6F26EE9D3800B59484 /* CoreDataModel.xcdatamodeld */; };
+		0B742A9E26F65E1A00B59484 /* ScalesCellDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B742A9D26F65E1A00B59484 /* ScalesCellDelete.swift */; };
+		0B742AA026F6872B00B59484 /* ScalesLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B742A9F26F6872B00B59484 /* ScalesLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		0B2AD73526CD7B5600A88B95 /* StorageAddCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageAddCell.swift; sourceTree = "<group>"; };
 		0B742A6D26EE9D0400B59484 /* ModelScales.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelScales.swift; sourceTree = "<group>"; };
 		0B742A7026EE9D3800B59484 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		0B742A9D26F65E1A00B59484 /* ScalesCellDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalesCellDelete.swift; sourceTree = "<group>"; };
+		0B742A9F26F6872B00B59484 /* ScalesLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScalesLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,8 @@
 			children = (
 				0B2AD71D26CD79D500A88B95 /* ScalesTableViewController.swift */,
 				0B2AD71F26CD79EB00A88B95 /* ScalesCell.swift */,
+				0B742A9D26F65E1A00B59484 /* ScalesCellDelete.swift */,
+				0B742A9F26F6872B00B59484 /* ScalesLabel.swift */,
 				0B742A6D26EE9D0400B59484 /* ModelScales.swift */,
 			);
 			path = Scales;
@@ -204,6 +210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B742A9E26F65E1A00B59484 /* ScalesCellDelete.swift in Sources */,
 				0B2AD71E26CD79D500A88B95 /* ScalesTableViewController.swift in Sources */,
 				0B2AD73426CD7B4500A88B95 /* StorageAddTable.swift in Sources */,
 				0B2AD70C26CD785F00A88B95 /* MainViewController.swift in Sources */,
@@ -214,6 +221,7 @@
 				0B2AD72426CD7A2300A88B95 /* ListTableViewController.swift in Sources */,
 				0B2AD72C26CD7A8800A88B95 /* StatisticsTableViewController.swift in Sources */,
 				0B2AD70826CD785F00A88B95 /* AppDelegate.swift in Sources */,
+				0B742AA026F6872B00B59484 /* ScalesLabel.swift in Sources */,
 				0B742A6E26EE9D0400B59484 /* ModelScales.swift in Sources */,
 				0B742A7126EE9D3800B59484 /* CoreDataModel.xcdatamodeld in Sources */,
 				0B2AD72926CD7A6800A88B95 /* StorageGroupTable.swift in Sources */,

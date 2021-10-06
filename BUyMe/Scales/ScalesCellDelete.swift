@@ -8,14 +8,11 @@
 
 import UIKit
 
-protocol DeleteDelegate : AnyObject {
-    func delAll( _controller: ScalesCellDelete)
-}
-
 class ScalesCellDelete: UITableViewCell {
     
-    weak var delegate :  DeleteDelegate?
-
+    weak var delegate :  ReloadDelegateScale?
+    weak var delegate2 :  ReloadDelegateList?
+    var typeCell : String = ""
     lazy var DeleteButton: UIButton = {
         let Button = UIButton(type: .system)
         Button.setTitle("Удалить всё", for: .normal)
@@ -45,9 +42,8 @@ class ScalesCellDelete: UITableViewCell {
     }
    
     @objc func DeleteButtonTouchUpInside(){
-        removeItem(at: -1)
-        delegate?.delAll(_controller: self)
-            
+        if typeCell == "Scales"{removeItemScales(at: -1); delegate?.reloadAll()}
+        if typeCell == "List"{removeItemList(at: -1); delegate2?.reloadAll()}
     }
     
     func initConstraints(){
@@ -55,7 +51,5 @@ class ScalesCellDelete: UITableViewCell {
         DeleteButton.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 10).isActive = true
         DeleteButton.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 10).isActive = true
         DeleteButton.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: -10).isActive = true
-        DeleteButton.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        DeleteButton.widthAnchor.constraint(equalTo: self.contentView.heightAnchor, multiplier: 9/10).isActive = true
     }
 }

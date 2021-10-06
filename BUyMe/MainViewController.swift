@@ -1,7 +1,7 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    
+   
     func but (button : UIButton) -> UIButton{
         button.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
         button.imageView?.contentMode = .scaleAspectFit
@@ -9,6 +9,7 @@ class MainViewController: UIViewController {
         button.backgroundColor = .systemGray2
         button.layer.cornerRadius = 20
         button.layer.borderWidth = 3
+        button.layer.borderColor = UIColor.cyan.cgColor
         button.setTitleColor(.black, for: .normal)
         return button
     }
@@ -60,14 +61,14 @@ class MainViewController: UIViewController {
         
     }
     @objc func ScaleButtonTouchUpInside(){
-        let viewController = ScalesTableViewController()
+        let viewController = ScalesViewController()
         let navigation = UINavigationController(rootViewController: viewController)
         navigation.modalPresentationStyle = .fullScreen
         navigation.modalTransitionStyle = .flipHorizontal
         self.present(navigation, animated: true, completion: nil)
     }
     @objc func ListButtonTouchUpInside(){
-        let viewController = ListTableViewController()
+        let viewController = ListViewController()
         let navigation = UINavigationController(rootViewController: viewController)
         navigation.modalPresentationStyle = .fullScreen
         navigation.modalTransitionStyle = .flipHorizontal
@@ -106,7 +107,7 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubviews()
-        view.backgroundColor = .white
+        view.backgroundColor = .systemBackground
         setupConstraints()
     }
     override func viewWillAppear(_ animated: Bool) {

@@ -148,7 +148,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
                     self.LabelPrice.text = String(ListSum())
                     tableView.reloadData() }
             }
-            /*let aletactoin2 = UIAlertAction(title: "Отмена", style: .cancel, handler: nil)*/
             let aletactoin2 = UIAlertAction(title: "Отмена", style: .default, handler: { (UIAlertAction) in
                 repairItemList(at: indexPath.row, price: 0.0, true)
                 self.LabelPrice.text = String(ListSum())
@@ -170,9 +169,6 @@ class ListViewController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         }else{
             let cell: UITableViewCell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell" )
-            //let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-            //cell.index = indexPath.row
-            //cell.delegate = self
             let item = ItemsList[indexPath.row]
             cell.textLabel?.text = String(item.value(forKey: "name") as! String)
             if  String((item.value(forKey: "price") as! Double)) != "0.0" {

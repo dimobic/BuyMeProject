@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0B0B716B270CF12900C70B19 /* StorageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0B716A270CF12900C70B19 /* StorageModel.swift */; };
+		0B0B716D270F0BC600C70B19 /* StorageItemCellMeasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0B716C270F0BC600C70B19 /* StorageItemCellMeasure.swift */; };
 		0B2AD70826CD785F00A88B95 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2AD70726CD785F00A88B95 /* AppDelegate.swift */; };
 		0B2AD70A26CD785F00A88B95 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2AD70926CD785F00A88B95 /* SceneDelegate.swift */; };
 		0B2AD70C26CD785F00A88B95 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2AD70B26CD785F00A88B95 /* MainViewController.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		0B0B716A270CF12900C70B19 /* StorageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageModel.swift; sourceTree = "<group>"; };
+		0B0B716C270F0BC600C70B19 /* StorageItemCellMeasure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageItemCellMeasure.swift; sourceTree = "<group>"; };
 		0B2AD70426CD785F00A88B95 /* BuyMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuyMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B2AD70726CD785F00A88B95 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0B2AD70926CD785F00A88B95 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				0B2AD72F26CD7B0300A88B95 /* StorageItemCell.swift */,
 				0B2AD73326CD7B4500A88B95 /* StorageAddTable.swift */,
 				0B2AD73526CD7B5600A88B95 /* StorageAddCell.swift */,
+				0B0B716C270F0BC600C70B19 /* StorageItemCellMeasure.swift */,
 				0B0B716A270CF12900C70B19 /* StorageModel.swift */,
 			);
 			path = Storage;
@@ -228,6 +231,7 @@
 				0B2AD72926CD7A6800A88B95 /* StorageGroupTable.swift in Sources */,
 				0B2AD73026CD7B0300A88B95 /* StorageItemCell.swift in Sources */,
 				0BD67806270906D400898434 /* ModelList.swift in Sources */,
+				0B0B716D270F0BC600C70B19 /* StorageItemCellMeasure.swift in Sources */,
 				0B2AD70A26CD785F00A88B95 /* SceneDelegate.swift in Sources */,
 				0B2AD72E26CD7AD400A88B95 /* StorageItemTable.swift in Sources */,
 			);

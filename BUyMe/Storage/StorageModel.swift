@@ -17,17 +17,25 @@ func saveItemsStorageGroup (nameGroup : String, icon : String?){
     Groups.append(GroupsItem)
 }
  
- func saveItemsLStorage (groupName : String, name : String, weight : Double = 0.0, plus : Double = 1.0, minus : Double = 1.0 , measure : String = "KG"){
+ func saveItemsLStorage (groupName : String, name : String, weight : String?, plus : String?, minus : String?, measure : Int = 1 ){
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
     let managedContext = appDelegate.persistentContainer.viewContext
     let entity = NSEntityDescription.entity(forEntityName: "GroupItem",in: managedContext)
     let StorageItem = NSManagedObject(entity: entity!,insertInto: managedContext)
+     
     StorageItem.setValue(groupName, forKeyPath: "group")
     StorageItem.setValue(name, forKeyPath: "name")
-    StorageItem.setValue(round(weight * 100)/100, forKeyPath: "weight")
-    StorageItem.setValue(round(plus * 100)/100, forKeyPath: "plus")
-    StorageItem.setValue(round(minus * 100)/100, forKeyPath: "minus")
+     if weight != nil, let weightM = textToDouble(weight){
+         StorageItem.setValue(round(weightM * 100)/100, forKeyPath: "weight")
+     }else{StorageItem.setValue(0.0, forKeyPath: "weight")}
+     if plus != nil, let plusM = textToDouble(plus){
+         StorageItem.setValue(round(plusM * 100)/100, forKeyPath: "plus")
+     }else{StorageItem.setValue(1.0, forKeyPath: "plus")}
+     if minus != nil, let minusM = textToDouble(minus){
+         StorageItem.setValue(round(minusM * 100)/100, forKeyPath: "minus")
+     }else{StorageItem.setValue(1.0, forKeyPath: "minus")}
     StorageItem.setValue(measure, forKeyPath: "measure")
+     
     do { try managedContext.save() }
     catch let error as NSError { print("Could not save. \(error), \(error.userInfo)")  }
     ItemStorage.append(StorageItem)
@@ -92,17 +100,37 @@ func removeItemStorageGroup (at index : Int){
      catch let error as NSError { print("Could not save. \(error), \(error.userInfo)")  }
  }
 
-
-
-//////////////////////////////////
-/*func repairItemList (at index : Int, price : Double, _ done : Bool){
-    print(index)
-    ItemsList[index].setValue(round(price * 100)/100, forKey: "price")
-    ItemsList[index].setValue(done, forKey: "done")
+func repairItemStorageAdd (at index : Int, groupName : String, name : String, weight : String?, plus : String?, minus : String?, measure : Int = 1 ){
+    ItemStorage[index].setValue(name, forKeyPath: "name")
+     if weight != nil, let weightM = textToDouble(weight){
+         ItemStorage[index].setValue(round(weightM * 100)/100, forKeyPath: "weight")
+     }else{ItemStorage[index].setValue(0.0, forKeyPath: "weight")}
+     if plus != nil, let plusM = textToDouble(plus){
+         ItemStorage[index].setValue(round(plusM * 100)/100, forKeyPath: "plus")
+     }else{ItemStorage[index].setValue(1.0, forKeyPath: "plus")}
+     if minus != nil, let minusM = textToDouble(minus){
+         ItemStorage[index].setValue(round(minusM * 100)/100, forKeyPath: "minus")
+     }else{ItemStorage[index].setValue(1.0, forKeyPath: "minus")}
+    ItemStorage[index].setValue(measure, forKeyPath: "measure")
     
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
     let managedContext = appDelegate.persistentContainer.viewContext
     do { try managedContext.save() }
     catch let error as NSError { print("Could not save. \(error), \(error.userInfo)")  }
 }
-*/
+
+func repairItemStodagePM (at index :Int, weight : Bool){
+    let weightDouble = ItemStorage[index].value(forKey: "weight") as! Double
+    if weight == true {
+        let plus = ItemStorage[index].value(forKey: "plus") as! Double
+        ItemStorage[index].setValue(round((weightDouble + plus) * 100)/100, forKeyPath: "weight")
+    }else {
+        let minus = ItemStorage[index].value(forKey: "minus") as! Double
+        ItemStorage[index].setValue(round((weightDouble - minus) * 100)/100, forKeyPath: "weight")
+    }
+    
+    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+    let managedContext = appDelegate.persistentContainer.viewContext
+    do { try managedContext.save() }
+    catch let error as NSError { print("Could not save. \(error), \(error.userInfo)")  }
+}

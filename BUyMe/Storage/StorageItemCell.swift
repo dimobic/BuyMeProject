@@ -9,6 +9,9 @@ import UIKit
 
 class StorageItemCell: UITableViewCell {
 
+    weak var delegete : StoragePlusMinusProtocol?
+    var PM = 0.0
+    var index = -1
     lazy var nameLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -27,10 +30,27 @@ class StorageItemCell: UITableViewCell {
     }()
     lazy var plusMinus : UIStepper = {
        let step = UIStepper()
+        step.value = 0
+        step.autorepeat = true
+        step.minimumValue = -1e5
+        step.maximumValue = 1e5
         step.translatesAutoresizingMaskIntoConstraints = false
+        step.addTarget(self, action: #selector(PlusButton), for: .valueChanged)
         return step
     }()
        
+    @objc func PlusButton(){
+        print(plusMinus.value)
+        if plusMinus.value < PM {
+            delegete?.minusButton(index : index)
+            PM = plusMinus.value
+        }else{
+            delegete?.plusButton(index: index)
+            PM = plusMinus.value
+        }
+    }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()}
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

@@ -7,21 +7,39 @@
 
 import UIKit
 
-class StatisticsTableViewController: UITableViewController {
+class StatisticsViewController: UITableViewController {
 
+    lazy var ComSoon : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 24)
+        label.textAlignment = .center
+        label.clipsToBounds = true
+        label.text = "Comming soon..."
+        return label
+    }()
+    
     @objc func CancelButton(){
         dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initConstraints()
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(CancelButton))
     }
-
+    func initConstraints(){
+        view.addSubview(ComSoon)
+        
+        ComSoon.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        ComSoon.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        ComSoon.widthAnchor.constraint(equalTo: view.widthAnchor,constant: -20).isActive = true
+        ComSoon.heightAnchor.constraint(equalToConstant: 300).isActive = true
+    }
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+   /* override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 0
     }
@@ -84,6 +102,6 @@ class StatisticsTableViewController: UITableViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
     }
-    */
+    */*/
 
 }

@@ -1,15 +1,52 @@
 import UIKit
+import CoreData
 
-class StorageItemTable: UITableViewController {
+protocol StorageNewElementProtocol :AnyObject{
+    func doneAddTapButton (groupName : String, name : String, weight : String?, plus : String?, minus : String? , measure : Int)
+    func doneEditTapButton(index: Int, groupName : String, name : String, weight : String?, plus : String?, minus : String? , measure : Int)
+    func cancelTapButton()
+}
+
+protocol StoragePlusMinusProtocol :AnyObject{
+    func plusButton( index: Int)
+    func minusButton(index: Int)
+}
+
+class StorageItemTable: UITableViewController, UINavigationControllerDelegate, StoragePlusMinusProtocol, StorageNewElementProtocol {
+    func plusButton(index: Int) {
+        repairItemStodagePM(at: index, weight: true)
+        tableView.reloadData()
+
+    }
+    
+    func minusButton(index: Int) {
+        repairItemStodagePM(at: index, weight: false)
+        tableView.reloadData()
+    }
+    
+    func doneAddTapButton(groupName : String, name : String, weight : String?, plus : String?, minus : String? , measure : Int) {
+        navigationController?.popViewController(animated: true)
+        saveItemsLStorage(groupName: nameGroup, name: name, weight: weight, plus: plus, minus: minus, measure: measure)
+        tableView.reloadData()
+    }
+    func doneEditTapButton(index: Int, groupName : String, name : String, weight : String?, plus : String?, minus : String? , measure : Int) {
+        navigationController?.popViewController(animated: true)
+        repairItemStorageAdd(at: index, groupName: nameGroup, name: name, weight: weight, plus: plus, minus: minus, measure: measure)
+        tableView.reloadData()
+    }
+    func cancelTapButton() {
+        navigationController?.popViewController(animated: true)
+    }
     
     var nameGroup : String = ""
-    var k = 0
     @objc func CancelButton(){ dismiss(animated: true, completion: nil)}
     
     @objc func AddButton(){
-        saveItemsLStorage(groupName: nameGroup, name: "Еда № \(k)")
-        k = k + 1
-        self.tableView.reloadData()
+        let viewController = StorageAddTable()
+        viewController.delegate = self
+        viewController.nameItem = nil
+        viewController.group = nameGroup
+        self.navigationController?.pushViewController(viewController, animated: true)
     }
     
     override func viewDidLoad() {
@@ -20,7 +57,7 @@ class StorageItemTable: UITableViewController {
             loadItemsStorage(nameGroup: self.nameGroup)
             self.tableView.reloadData()
         }
-        tableView.allowsSelection = false
+        //tableView.allowsSelection = false
         navigationItem.title = nameGroup
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(CancelButton))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(AddButton))
@@ -35,21 +72,25 @@ class StorageItemTable: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellDel", for: indexPath) as! StorageItemCell
-        cell.nameLabel.text = ItemStorage[indexPath.row].value(forKey: "name") as! String  //+ ItemStorage[indexPath.row].value(forKey: "measure")as! String
-        cell.weightLabel.text = String(ItemStorage[indexPath.row].value(forKey: "weight") as! Double)
+        cell.nameLabel.text = (ItemStorage[indexPath.row].value(forKey: "name") as! String)
+        cell.delegete = self
+        cell.index = indexPath.row
+        cell.weightLabel.text = String(ItemStorage[indexPath.row].value(forKey: "weight") as! Double) //+ (ItemStorage[indexPath.row].value(forKey: "measure") as! String)
         return cell
     }
 
-    /*override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let viewController = StorageItemTable()
-        viewController.nameGroup = Groups[indexPath.row].value(forKey: "nameGroup") as! String
-        let navigation = UINavigationController(rootViewController: viewController)
-        navigation.modalPresentationStyle = .fullScreen
-        navigation.modalTransitionStyle = .crossDissolve
-        self.present(navigation, animated: true, completion: nil)
-    }*/
+        let viewController = StorageAddTable()
+        viewController.nameItem = ItemStorage[indexPath.row]
+        viewController.group = nameGroup
+        viewController.index = indexPath.row
+        viewController.modalPresentationStyle = .fullScreen
+        viewController.modalTransitionStyle = .crossDissolve
+        viewController.delegate = self
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         if tableView.isEditing {

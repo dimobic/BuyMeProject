@@ -75,7 +75,7 @@ class MainViewController: UIViewController {
         self.present(navigation, animated: true, completion: nil)
     }
     @objc func StatisticsButtonTouchUpInside(){
-        let viewController = StatisticsTableViewController()
+        let viewController = StatisticsViewController()
         let navigation = UINavigationController(rootViewController: viewController)
         navigation.modalPresentationStyle = .fullScreen
         navigation.modalTransitionStyle = .flipHorizontal

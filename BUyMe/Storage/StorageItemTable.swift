@@ -75,7 +75,22 @@ class StorageItemTable: UITableViewController, UINavigationControllerDelegate, S
         cell.nameLabel.text = (ItemStorage[indexPath.row].value(forKey: "name") as! String)
         cell.delegete = self
         cell.index = indexPath.row
-        cell.weightLabel.text = String(ItemStorage[indexPath.row].value(forKey: "weight") as! Double) //+ (ItemStorage[indexPath.row].value(forKey: "measure") as! String)
+        let measure: String
+        switch (ItemStorage[indexPath.row].value(forKey: "measure") as! Int){
+        case 0:
+            measure = " Кг"
+        case 1:
+            measure = " г"
+        case 2:
+            measure = " Л"
+        case 3:
+            measure = " мЛ"
+        case 4:
+            measure = " Шт"
+        default:
+            measure = " Кг"
+        }
+        cell.weightLabel.text = String(ItemStorage[indexPath.row].value(forKey: "weight") as! Double) + measure
         return cell
     }
 

@@ -126,7 +126,8 @@ func repairItemStodagePM (at index :Int, weight : Bool){
         ItemStorage[index].setValue(round((weightDouble + plus) * 100)/100, forKeyPath: "weight")
     }else {
         let minus = ItemStorage[index].value(forKey: "minus") as! Double
-        ItemStorage[index].setValue(round((weightDouble - minus) * 100)/100, forKeyPath: "weight")
+        if weightDouble - minus > 0 { ItemStorage[index].setValue(round((weightDouble - minus) * 100)/100, forKeyPath: "weight")
+        }else{ItemStorage[index].setValue(0, forKeyPath: "weight")}
     }
     
     guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }

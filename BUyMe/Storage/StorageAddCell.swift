@@ -27,7 +27,6 @@ class StorageAddCell: UITableViewCell {
         field.clipsToBounds = true
         field.autocorrectionType = .no
         field.enablesReturnKeyAutomatically = true
-        field.keyboardType = .decimalPad
         return field
     }
     
@@ -37,7 +36,6 @@ class StorageAddCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 17)
         label.textAlignment = .center
         label.clipsToBounds = true
-        //label.text = "Имя"
         return label
     }()
     lazy var weightLabel : UILabel = {
@@ -46,7 +44,6 @@ class StorageAddCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 17)
         label.textAlignment = .center
         label.clipsToBounds = true
-        //label.text = "Количество/Вес"
         return label
     }()
 

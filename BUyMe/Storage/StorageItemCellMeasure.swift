@@ -10,7 +10,7 @@ import UIKit
 class StorageItemCellMeasure: UITableViewCell {
 
     lazy var Segment : UISegmentedControl = {
-        let segment  = UISegmentedControl(items: ["Кг","г","Л","мл","Уп."])
+        let segment  = UISegmentedControl(items: ["Кг","г","Л","мЛ","Шт"])
         //segment.addTarget(self, action: #selector(selectSegment), for: .allEvents)
         segment.translatesAutoresizingMaskIntoConstraints = false
         return segment

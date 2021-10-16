@@ -106,14 +106,18 @@ class StorageAddTable: UITableViewController, EditTextProtocol, UITextFieldDeleg
                     cell.index = 0
                     cell.nameLabel.text = "Имя:"
                     cell.textName.placeholder = "Введите имя"
+                    cell.textName.keyboardType = .default
                     cell.weightLabel.text = "Вес:"
                     cell.textWeight.placeholder = "Введите вес"
+                    cell.textWeight.keyboardType = .decimalPad
                 case 1:
                     cell.index = 1
                     cell.nameLabel.text = "Увеличивать на:"
                     cell.textName.placeholder = "Сколько единиц"
+                    cell.textName.keyboardType = .decimalPad
                     cell.weightLabel.text = "Уменьшать на:"
                     cell.textWeight.placeholder = "Сколько единиц"
+                    cell.textWeight.keyboardType = .decimalPad
                 default:
                     break
                 }
